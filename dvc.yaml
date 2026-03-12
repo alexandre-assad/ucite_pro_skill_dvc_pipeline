@@ -1,0 +1,52 @@
+stages:
+  add_noise:
+    foreach: ${snr_levels}
+    do:
+      cmd: >
+        uv run python entrypoints/add_noise_step.py 
+        --input_manifest data/manifests/clean.jsonl 
+        --output_manifest data/manifests/noisy_snr_${item}.jsonl 
+        --output_audio_dir data/audio/noisy/snr_${item}/ 
+        --snr_db ${item} 
+        --seed ${seed}
+      deps:
+        - entrypoints/add_noise_step.py
+        - data/manifests/clean.jsonl
+      outs:
+        - data/manifests/noisy_snr_${item}.jsonl
+        - data/audio/noisy/snr_${item}/
+
+  transcribe:
+    foreach: ${snr_levels}
+    do:
+      cmd: >
+        uv run python entrypoints/transcribe_step.py 
+        --input_manifest data/manifests/noisy_snr_${item}.jsonl 
+        --output_manifest data/predictions/pred_snr_${item}.jsonl
+      deps:
+        - entrypoints/transcribe_step.py
+        - data/manifests/noisy_snr_${item}.jsonl
+      outs:
+        - data/predictions/pred_snr_${item}.jsonl
+
+  evaluate:
+    foreach: ${snr_levels}
+    do:
+      cmd: >
+        uv run python entrypoints/evaluate_step.py 
+        --input_manifest data/predictions/pred_snr_${item}.jsonl 
+        --output_metrics data/metrics/metrics_snr_${item}.jsonl
+      deps:
+        - entrypoints/evaluate_step.py
+        - data/predictions/pred_snr_${item}.jsonl
+      metrics:
+        - data/metrics/metrics_snr_${item}.jsonl:
+            cache: false
+
+  plot_results:
+    cmd: uv run python entrypoints/plot_step.py --metrics_dir data/metrics/ --output_plot reports/per_vs_snr.png
+    deps:
+      - entrypoints/plot_step.py
+      - data/metrics/
+    outs:
+      - reports/per_vs_snr.png

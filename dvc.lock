@@ -1,0 +1,305 @@
+schema: '2.0'
+stages:
+  add_noise@20.0:
+    cmd: "uv run python entrypoints/add_noise_step.py  --input_manifest data/manifests/clean.jsonl\
+      \  --output_manifest data/manifests/noisy_snr_20.0.jsonl  --output_audio_dir
+      data/audio/noisy/snr_20.0/  --snr_db 20.0  --seed 42\n"
+    deps:
+    - path: data/manifests/clean.jsonl
+      hash: md5
+      md5: 48759a6d4d8d2b2862f68f62921bb8ae
+      size: 92048
+    - path: entrypoints/add_noise_step.py
+      hash: md5
+      md5: 4112f133bbf3bea20770051e453ee7cd
+      size: 1026
+    outs:
+    - path: data/audio/noisy/snr_20.0/
+      hash: md5
+      md5: 860276781c78937ec8eba78762fec56b.dir
+      size: 135465452
+      nfiles: 145
+    - path: data/manifests/noisy_snr_20.0.jsonl
+      hash: md5
+      md5: 33986a75d7958ef2db62fb15f32e4d7c
+      size: 89293
+  add_noise@10.0:
+    cmd: "uv run python entrypoints/add_noise_step.py  --input_manifest data/manifests/clean.jsonl\
+      \  --output_manifest data/manifests/noisy_snr_10.0.jsonl  --output_audio_dir
+      data/audio/noisy/snr_10.0/  --snr_db 10.0  --seed 42\n"
+    deps:
+    - path: data/manifests/clean.jsonl
+      hash: md5
+      md5: 48759a6d4d8d2b2862f68f62921bb8ae
+      size: 92048
+    - path: entrypoints/add_noise_step.py
+      hash: md5
+      md5: 4112f133bbf3bea20770051e453ee7cd
+      size: 1026
+    outs:
+    - path: data/audio/noisy/snr_10.0/
+      hash: md5
+      md5: f89784ce527cfbe8bda7cfb650a5f807.dir
+      size: 135465452
+      nfiles: 145
+    - path: data/manifests/noisy_snr_10.0.jsonl
+      hash: md5
+      md5: c60958b899ca6999829d820d943b2d15
+      size: 89293
+  add_noise@5.0:
+    cmd: "uv run python entrypoints/add_noise_step.py  --input_manifest data/manifests/clean.jsonl\
+      \  --output_manifest data/manifests/noisy_snr_5.0.jsonl  --output_audio_dir
+      data/audio/noisy/snr_5.0/  --snr_db 5.0  --seed 42\n"
+    deps:
+    - path: data/manifests/clean.jsonl
+      hash: md5
+      md5: 48759a6d4d8d2b2862f68f62921bb8ae
+      size: 92048
+    - path: entrypoints/add_noise_step.py
+      hash: md5
+      md5: 4112f133bbf3bea20770051e453ee7cd
+      size: 1026
+    outs:
+    - path: data/audio/noisy/snr_5.0/
+      hash: md5
+      md5: a7f3404319610f897939dda1d2455807.dir
+      size: 135465452
+      nfiles: 145
+    - path: data/manifests/noisy_snr_5.0.jsonl
+      hash: md5
+      md5: a7d9aaf2471c2a9725c132c206486cb6
+      size: 88858
+  add_noise@0.0:
+    cmd: "uv run python entrypoints/add_noise_step.py  --input_manifest data/manifests/clean.jsonl\
+      \  --output_manifest data/manifests/noisy_snr_0.0.jsonl  --output_audio_dir
+      data/audio/noisy/snr_0.0/  --snr_db 0.0  --seed 42\n"
+    deps:
+    - path: data/manifests/clean.jsonl
+      hash: md5
+      md5: 48759a6d4d8d2b2862f68f62921bb8ae
+      size: 92048
+    - path: entrypoints/add_noise_step.py
+      hash: md5
+      md5: 4112f133bbf3bea20770051e453ee7cd
+      size: 1026
+    outs:
+    - path: data/audio/noisy/snr_0.0/
+      hash: md5
+      md5: ecc30dcf6f05acdc2c92bd534f7f8d6d.dir
+      size: 135465452
+      nfiles: 145
+    - path: data/manifests/noisy_snr_0.0.jsonl
+      hash: md5
+      md5: 987cc3483f93834382a2ce0787801f33
+      size: 88858
+  add_noise@-5.0:
+    cmd: "uv run python entrypoints/add_noise_step.py  --input_manifest data/manifests/clean.jsonl\
+      \  --output_manifest data/manifests/noisy_snr_-5.0.jsonl  --output_audio_dir
+      data/audio/noisy/snr_-5.0/  --snr_db -5.0  --seed 42\n"
+    deps:
+    - path: data/manifests/clean.jsonl
+      hash: md5
+      md5: 48759a6d4d8d2b2862f68f62921bb8ae
+      size: 92048
+    - path: entrypoints/add_noise_step.py
+      hash: md5
+      md5: 4112f133bbf3bea20770051e453ee7cd
+      size: 1026
+    outs:
+    - path: data/audio/noisy/snr_-5.0/
+      hash: md5
+      md5: 1cabda0171cb2af02d00742ce809e33b.dir
+      size: 135465452
+      nfiles: 145
+    - path: data/manifests/noisy_snr_-5.0.jsonl
+      hash: md5
+      md5: cb1ea611b8f864bfb74f76859ca2b3c8
+      size: 89293
+  transcribe@20.0:
+    cmd: "uv run python entrypoints/transcribe_step.py  --input_manifest data/manifests/noisy_snr_20.0.jsonl\
+      \  --output_manifest data/predictions/pred_snr_20.0.jsonl\n"
+    deps:
+    - path: data/manifests/noisy_snr_20.0.jsonl
+      hash: md5
+      md5: 33986a75d7958ef2db62fb15f32e4d7c
+      size: 89293
+    - path: entrypoints/transcribe_step.py
+      hash: md5
+      md5: cfa0c77b9a38ae761363a1d1e4c78444
+      size: 1133
+    outs:
+    - path: data/predictions/pred_snr_20.0.jsonl
+      hash: md5
+      md5: d334b33ea243fc61cf9ce941f8745670
+      size: 120889
+  transcribe@10.0:
+    cmd: "uv run python entrypoints/transcribe_step.py  --input_manifest data/manifests/noisy_snr_10.0.jsonl\
+      \  --output_manifest data/predictions/pred_snr_10.0.jsonl\n"
+    deps:
+    - path: data/manifests/noisy_snr_10.0.jsonl
+      hash: md5
+      md5: c60958b899ca6999829d820d943b2d15
+      size: 89293
+    - path: entrypoints/transcribe_step.py
+      hash: md5
+      md5: cfa0c77b9a38ae761363a1d1e4c78444
+      size: 1133
+    outs:
+    - path: data/predictions/pred_snr_10.0.jsonl
+      hash: md5
+      md5: d4e7f70951101b030c77df6d76ffe9d1
+      size: 117443
+  transcribe@5.0:
+    cmd: "uv run python entrypoints/transcribe_step.py  --input_manifest data/manifests/noisy_snr_5.0.jsonl\
+      \  --output_manifest data/predictions/pred_snr_5.0.jsonl\n"
+    deps:
+    - path: data/manifests/noisy_snr_5.0.jsonl
+      hash: md5
+      md5: a7d9aaf2471c2a9725c132c206486cb6
+      size: 88858
+    - path: entrypoints/transcribe_step.py
+      hash: md5
+      md5: cfa0c77b9a38ae761363a1d1e4c78444
+      size: 1133
+    outs:
+    - path: data/predictions/pred_snr_5.0.jsonl
+      hash: md5
+      md5: 49a17f5416f7cb27df138780d56fede0
+      size: 112734
+  transcribe@0.0:
+    cmd: "uv run python entrypoints/transcribe_step.py  --input_manifest data/manifests/noisy_snr_0.0.jsonl\
+      \  --output_manifest data/predictions/pred_snr_0.0.jsonl\n"
+    deps:
+    - path: data/manifests/noisy_snr_0.0.jsonl
+      hash: md5
+      md5: 987cc3483f93834382a2ce0787801f33
+      size: 88858
+    - path: entrypoints/transcribe_step.py
+      hash: md5
+      md5: cfa0c77b9a38ae761363a1d1e4c78444
+      size: 1133
+    outs:
+    - path: data/predictions/pred_snr_0.0.jsonl
+      hash: md5
+      md5: 1c3760745bcbea571c0cd1dfad05948f
+      size: 107195
+  transcribe@-5.0:
+    cmd: "uv run python entrypoints/transcribe_step.py  --input_manifest data/manifests/noisy_snr_-5.0.jsonl\
+      \  --output_manifest data/predictions/pred_snr_-5.0.jsonl\n"
+    deps:
+    - path: data/manifests/noisy_snr_-5.0.jsonl
+      hash: md5
+      md5: cb1ea611b8f864bfb74f76859ca2b3c8
+      size: 89293
+    - path: entrypoints/transcribe_step.py
+      hash: md5
+      md5: cfa0c77b9a38ae761363a1d1e4c78444
+      size: 1133
+    outs:
+    - path: data/predictions/pred_snr_-5.0.jsonl
+      hash: md5
+      md5: 0292001c5687c84b7586e67fa07556a8
+      size: 99056
+  evaluate@20.0:
+    cmd: "uv run python entrypoints/evaluate_step.py  --input_manifest data/predictions/pred_snr_20.0.jsonl\
+      \  --output_metrics data/metrics/metrics_snr_20.0.jsonl\n"
+    deps:
+    - path: data/predictions/pred_snr_20.0.jsonl
+      hash: md5
+      md5: d334b33ea243fc61cf9ce941f8745670
+      size: 120889
+    - path: entrypoints/evaluate_step.py
+      hash: md5
+      md5: 145a227f415117e79bcc4aebd9f9b12b
+      size: 649
+    outs:
+    - path: data/metrics/metrics_snr_20.0.jsonl
+      hash: md5
+      md5: 947374e556a53d8313922445f1fe55b2
+      size: 35
+  evaluate@10.0:
+    cmd: "uv run python entrypoints/evaluate_step.py  --input_manifest data/predictions/pred_snr_10.0.jsonl\
+      \  --output_metrics data/metrics/metrics_snr_10.0.jsonl\n"
+    deps:
+    - path: data/predictions/pred_snr_10.0.jsonl
+      hash: md5
+      md5: d4e7f70951101b030c77df6d76ffe9d1
+      size: 117443
+    - path: entrypoints/evaluate_step.py
+      hash: md5
+      md5: 145a227f415117e79bcc4aebd9f9b12b
+      size: 649
+    outs:
+    - path: data/metrics/metrics_snr_10.0.jsonl
+      hash: md5
+      md5: 258cdcb8fb9fa9d5d0b560ab17cee71d
+      size: 35
+  evaluate@5.0:
+    cmd: "uv run python entrypoints/evaluate_step.py  --input_manifest data/predictions/pred_snr_5.0.jsonl\
+      \  --output_metrics data/metrics/metrics_snr_5.0.jsonl\n"
+    deps:
+    - path: data/predictions/pred_snr_5.0.jsonl
+      hash: md5
+      md5: 49a17f5416f7cb27df138780d56fede0
+      size: 112734
+    - path: entrypoints/evaluate_step.py
+      hash: md5
+      md5: 145a227f415117e79bcc4aebd9f9b12b
+      size: 649
+    outs:
+    - path: data/metrics/metrics_snr_5.0.jsonl
+      hash: md5
+      md5: 2ddf5911b1151a3b92b029e2d18f11b7
+      size: 35
+  evaluate@0.0:
+    cmd: "uv run python entrypoints/evaluate_step.py  --input_manifest data/predictions/pred_snr_0.0.jsonl\
+      \  --output_metrics data/metrics/metrics_snr_0.0.jsonl\n"
+    deps:
+    - path: data/predictions/pred_snr_0.0.jsonl
+      hash: md5
+      md5: 1c3760745bcbea571c0cd1dfad05948f
+      size: 107195
+    - path: entrypoints/evaluate_step.py
+      hash: md5
+      md5: 145a227f415117e79bcc4aebd9f9b12b
+      size: 649
+    outs:
+    - path: data/metrics/metrics_snr_0.0.jsonl
+      hash: md5
+      md5: c9044b334031548a1291e458c758952e
+      size: 34
+  evaluate@-5.0:
+    cmd: "uv run python entrypoints/evaluate_step.py  --input_manifest data/predictions/pred_snr_-5.0.jsonl\
+      \  --output_metrics data/metrics/metrics_snr_-5.0.jsonl\n"
+    deps:
+    - path: data/predictions/pred_snr_-5.0.jsonl
+      hash: md5
+      md5: 0292001c5687c84b7586e67fa07556a8
+      size: 99056
+    - path: entrypoints/evaluate_step.py
+      hash: md5
+      md5: 145a227f415117e79bcc4aebd9f9b12b
+      size: 649
+    outs:
+    - path: data/metrics/metrics_snr_-5.0.jsonl
+      hash: md5
+      md5: c227c63fa505ca5ddb45041cfe18ab2b
+      size: 35
+  plot_results:
+    cmd: uv run python entrypoints/plot_step.py --metrics_dir data/metrics/ 
+      --output_plot reports/per_vs_snr.png
+    deps:
+    - path: data/metrics/
+      hash: md5
+      md5: 9160c5c222c8a8cfddc21ab788fa736a.dir
+      size: 174
+      nfiles: 5
+    - path: entrypoints/plot_step.py
+      hash: md5
+      md5: 867cf3374bd8e95a22ea7d3abbbb220d
+      size: 1107
+    outs:
+    - path: reports/per_vs_snr.png
+      hash: md5
+      md5: 499da9a453e72fe39a2d78d6685fdb1c
+      size: 29330

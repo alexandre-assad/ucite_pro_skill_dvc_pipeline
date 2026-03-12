@@ -1,0 +1,9 @@
+languages:
+  - en
+seed: 42
+snr_levels:
+  - 20.0
+  - 10.0
+  - 5.0
+  - 0.0
+  - -5.0
